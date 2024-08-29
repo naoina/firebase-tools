@@ -29,8 +29,9 @@ function DataConnect() {
 
   return (
     <>
+      <Spacer size="large" />
       <PanelSection title="Local Development">
-        {!isConnectedToPostgres && (
+        {!isConnectedToPostgres ? (
           <p>
             Connect to Local PostgreSQL.
             <br></br>
@@ -39,13 +40,12 @@ function DataConnect() {
               Working with PostgreSQL
             </a>
           </p>
+        ) : (
+          <label>Local emulator connected to:</label>
         )}
-        <Spacer size="xsmall" />
+        <Spacer size="small" />
         {isConnectedToPostgres ? (
-          <>
-            <label>Local emulator connected to:</label>
-            <VSCodeTextField disabled value={psqlString}></VSCodeTextField>
-          </>
+          <VSCodeTextField disabled value={psqlString}></VSCodeTextField>
         ) : (
           <VSCodeButton onClick={() => broker.send("connectToPostgres")}>
             Connect to Local PostgreSQL
@@ -53,7 +53,7 @@ function DataConnect() {
         )}
         <Spacer size="xlarge" />
         <p>
-          Configure a generated SDK. 
+          Configure a generated SDK.
           <br></br>
           See also:{" "}
           <a href="https://firebase.google.com/docs/data-connect/gp/web-sdk">
@@ -64,6 +64,7 @@ function DataConnect() {
           Configure Generated SDK
         </VSCodeButton>
       </PanelSection>
+      <Spacer size="large" />
       <PanelSection title="Production" isLast={true}>
         <p>
           Deploy FDC services and connectors to production. See also:{" "}
@@ -71,7 +72,7 @@ function DataConnect() {
             Deploying
           </a>
         </p>
-        <Spacer size="xsmall" />
+        <Spacer size="small" />
         <VSCodeButton onClick={() => broker.send("fdc.deploy-all")}>
           Deploy
         </VSCodeButton>

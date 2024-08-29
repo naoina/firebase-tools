@@ -64,6 +64,7 @@ export async function registerCore(
 
   const emulatorsController = new EmulatorsController(broker);
   // Start the emulators when the extension starts.
+  // TODO check if there's a dataconnect.yaml otherwise don't start emulators
   emulatorsController.startEmulators();
 
   const openRcCmd = vscode.commands.registerCommand(
